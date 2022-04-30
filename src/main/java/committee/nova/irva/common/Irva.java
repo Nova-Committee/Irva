@@ -8,7 +8,6 @@ public class Irva {
     public static final String MODID = "irva";
 
     public Irva() {
-
         MinecraftForge.EVENT_BUS.register(this);
     }
 }

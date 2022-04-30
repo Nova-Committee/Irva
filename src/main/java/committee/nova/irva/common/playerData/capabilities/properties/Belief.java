@@ -6,6 +6,8 @@ import committee.nova.irva.common.util.TextUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 
+import static committee.nova.irva.common.util.StringReference.NBT_BELIEF;
+
 public enum Belief implements IBelief {
     NONE(0, "none"),
     MANI(1, "mani"),
@@ -28,7 +30,7 @@ public enum Belief implements IBelief {
     }
 
     public static Belief deserialize(CompoundTag tag) {
-        final int idGot = tag.getInt("irva_belief");
+        final int idGot = tag.getInt(NBT_BELIEF);
         for (final Belief b : Belief.values()) {
             if (b.id == idGot) return b;
         }
@@ -52,6 +54,6 @@ public enum Belief implements IBelief {
 
     @Override
     public void serialize(CompoundTag tag) {
-        tag.putInt("irva_belief", id);
+        tag.putInt(NBT_BELIEF, id);
     }
 }

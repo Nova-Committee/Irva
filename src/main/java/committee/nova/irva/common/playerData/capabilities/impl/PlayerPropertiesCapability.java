@@ -4,11 +4,26 @@ import committee.nova.irva.common.playerData.capabilities.api.IPlayerPropertiesC
 import committee.nova.irva.common.playerData.capabilities.properties.Belief;
 import committee.nova.irva.common.playerData.capabilities.properties.api.IBelief;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
+
+import static committee.nova.irva.common.util.StringReference.NBT_BELIEF_DEPTH;
+import static committee.nova.irva.common.util.StringReference.NBT_KARMA;
 
 public class PlayerPropertiesCapability implements IPlayerPropertiesCapability {
+    public static final Capability<PlayerPropertiesCapability> PLAYER_PROPERTIES_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+    });
+
     private byte karma;
     private IBelief belief;
     private byte beliefDepth;
+
+    public PlayerPropertiesCapability() {
+        karma = 0;
+        belief = Belief.NONE;
+        beliefDepth = 0;
+    }
 
     @Override
     public byte getKarma() {
@@ -28,16 +43,16 @@ public class PlayerPropertiesCapability implements IPlayerPropertiesCapability {
     @Override
     public CompoundTag serializeNBT() {
         final CompoundTag tag = new CompoundTag();
-        tag.putByte("irva_karma", karma);
+        tag.putByte(NBT_KARMA, karma);
         belief.serialize(tag);
-        tag.putByte("irva_belief_depth", beliefDepth);
+        tag.putByte(NBT_BELIEF_DEPTH, beliefDepth);
         return tag;
     }
 
     @Override
     public void deserializeNBT(CompoundTag tag) {
-        karma = tag.getByte("irva_karma");
+        karma = tag.getByte(NBT_KARMA);
         belief = Belief.deserialize(tag);
-        beliefDepth = tag.getByte("irva_belief_depth");
+        beliefDepth = tag.getByte(NBT_BELIEF_DEPTH);
     }
 }
