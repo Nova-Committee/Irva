@@ -1,0 +1,11 @@
+modLoader = "javafml"
+loaderVersion = "[40,)"
+license = "AGPL v3"
+[[mods]]
+modId = "irva"
+version = "1.0.0"
+displayName = "Irva"
+credits = ""
+authors = "Tapio"
+description = '''
+'''
