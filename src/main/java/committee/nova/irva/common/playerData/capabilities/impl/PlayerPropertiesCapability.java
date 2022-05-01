@@ -12,7 +12,7 @@ import static committee.nova.irva.common.util.StringReference.NBT_BELIEF_DEPTH;
 import static committee.nova.irva.common.util.StringReference.NBT_KARMA;
 
 public class PlayerPropertiesCapability implements IPlayerPropertiesCapability {
-    public static final Capability<PlayerPropertiesCapability> PLAYER_PROPERTIES_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+    public static final Capability<IPlayerPropertiesCapability> PLAYER_PROPERTIES_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
     });
 
     private byte karma;
@@ -44,6 +44,7 @@ public class PlayerPropertiesCapability implements IPlayerPropertiesCapability {
     public CompoundTag serializeNBT() {
         final CompoundTag tag = new CompoundTag();
         tag.putByte(NBT_KARMA, karma);
+        if (belief == null) belief = Belief.NONE;
         belief.serialize(tag);
         tag.putByte(NBT_BELIEF_DEPTH, beliefDepth);
         return tag;
@@ -54,5 +55,26 @@ public class PlayerPropertiesCapability implements IPlayerPropertiesCapability {
         karma = tag.getByte(NBT_KARMA);
         belief = Belief.deserialize(tag);
         beliefDepth = tag.getByte(NBT_BELIEF_DEPTH);
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerPropertiesCapability{" +
+                "karma=" + karma +
+                ", belief=" + belief +
+                ", beliefDepth=" + beliefDepth +
+                '}';
+    }
+
+    public void setKarma(byte karma) {
+        this.karma = karma;
+    }
+
+    public void setBelief(IBelief belief) {
+        this.belief = belief;
+    }
+
+    public void setBeliefDepth(byte beliefDepth) {
+        this.beliefDepth = beliefDepth;
     }
 }

@@ -10,4 +10,10 @@ public interface IPlayerPropertiesCapability extends INBTSerializable<CompoundTa
     IBelief getBelief();
 
     byte getBeliefDepth();
+
+    void setKarma(byte karma);
+
+    void setBelief(IBelief belief);
+
+    void setBeliefDepth(byte depth);
 }

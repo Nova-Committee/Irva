@@ -56,4 +56,11 @@ public enum Belief implements IBelief {
     public void serialize(CompoundTag tag) {
         tag.putInt(NBT_BELIEF, id);
     }
+
+    @Override
+    public String toString() {
+        return "Belief{" +
+                "name=" + name.getString() +
+                '}';
+    }
 }
