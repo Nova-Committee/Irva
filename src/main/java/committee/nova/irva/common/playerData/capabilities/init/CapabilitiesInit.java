@@ -32,14 +32,6 @@ public class CapabilitiesInit {
         original.reviveCaps();
         final LazyOptional<IPlayerPropertiesCapability> oldCap = original.getCapability(PlayerPropertiesCapability.PLAYER_PROPERTIES_CAPABILITY);
         final LazyOptional<IPlayerPropertiesCapability> newCap = event.getPlayer().getCapability(PlayerPropertiesCapability.PLAYER_PROPERTIES_CAPABILITY);
-        if (!oldCap.isPresent()) {
-            System.out.println(0);
-            return;
-        }
-        if (!newCap.isPresent()) {
-            System.out.println(1);
-            return;
-        }
         newCap.ifPresent((n) -> oldCap.ifPresent((o) -> n.deserializeNBT(o.serializeNBT())));
         original.invalidateCaps();
     }
